@@ -10,6 +10,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+
+import com.example.microservice.filters.CustomFilter;
+
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.core.session.SessionRegistryImpl;
 
@@ -54,7 +58,11 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
-        http.authorizeRequests()
+        http.addFilterBefore(new CustomFilter(), ChannelProcessingFilter.class);
+        
+        http.csrf().disable()
+        .authorizeRequests()
+        .antMatchers("/api/unsecured").permitAll()
         .antMatchers("/api/**").hasRole("manager") // only manager with role user are allowed to access
         .antMatchers("api/**").hasRole("manager"); // only manager with role user are allowed to access
         http.authorizeRequests().anyRequest().permitAll();
