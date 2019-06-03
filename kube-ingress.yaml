@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: bdf-exalab
+  name: sb-app
+spec:
+  rules:
+  - host: sb-app.bdf-clu5.paas.eclair.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: sb-app
+          servicePort: http
+      - path: /api/unsecured
+        backend:
+          serviceName: sb-app2
+          servicePort: 81
+  tls:
+   - hosts:
+     - sb-app.bdf-clu5.paas.eclair.local
+
+     
