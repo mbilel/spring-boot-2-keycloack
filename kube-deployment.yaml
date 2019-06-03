@@ -1,45 +1,21 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sb-app
-  namespace: bdf-exalab
+  name: microservice
   labels:
-    app: sb-app
-    env: dev
+    app: microservice
 spec:
+  replicas: 2
   selector:
     matchLabels:
-      app: sb-app
+      app: microservice
   template:
     metadata:
       labels:
-        app: sb-app
+        app: microservice
     spec:
-      restartPolicy: Always
       containers:
-      - name: sb-app
-        image: bdf.artifactory.sofact.bdf.dns.eclair.local/sb-app:v1
-        imagePullPolicy: Always
-        resources:
-          requests:	
-            cpu: 300m
-            memory: 512Mi
-          limits:
-            cpu: 300m
-            memory: 512Mi
+      - name: microservice
+        image: mbilel/my-repo:spring-boot-demo
         ports:
         - containerPort: 8000
-          name: sb-app
-      - name: sb-app2
-        image: bdf.artifactory.sofact.bdf.dns.eclair.local/sb-app:v2
-        imagePullPolicy: Always
-        resources:
-          requests:	
-            cpu: 300m
-            memory: 512Mi
-          limits:
-            cpu: 300m
-            memory: 512Mi
-        ports:
-        - containerPort: 8001
-          name: sb-app2         
