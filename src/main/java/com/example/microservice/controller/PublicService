@@ -29,6 +29,9 @@ public class PublicService {
 	
 	@Value("${file.uploadDir}")
 	 private  String UPLOADED_FOLDER;
+	
+	@Value("${API_KEY}")
+	 private  String envVariable1;
 	 
 	@PostMapping("/upload")
 	public ResponseEntity<String> uploadData(@RequestParam("file") MultipartFile file ,HttpServletResponse response) throws Exception {
@@ -60,6 +63,7 @@ public class PublicService {
 
 	
 			listString = String.join("<br>", result);
+			listString += "<br>" + envVariable1;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
