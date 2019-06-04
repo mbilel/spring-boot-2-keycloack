@@ -19,3 +19,11 @@ spec:
         image: mbilel/my-repo:spring-boot-demo
         ports:
         - containerPort: 8000
+        env:
+        - name: API_KEY_ENV
+          value: envVariableFromKubeConfig
+        - name: LANGUAGE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: language
+              key: LANGUAGE_ENV
