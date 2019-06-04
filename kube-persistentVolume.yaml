@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sb-persistent-volume
+  labels:
+    app: sb-app
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 512Mi
+  hostPath:
+    path: "/tmp/kubernetes-volume"
