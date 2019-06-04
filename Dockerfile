@@ -13,6 +13,9 @@ EXPOSE 8080
 # The application's jar file
 ARG JAR_FILE=target/micro-service.jar
 
+#set environment variable
+ENV API_KEY envVariableTest
+
 RUN mkdir applis
 
 WORKDIR /applis
