@@ -13,8 +13,8 @@ EXPOSE 8080
 # The application's jar file
 ARG JAR_FILE=target/micro-service.jar
 
-#set environment variable
-ENV API_KEY envVariableTest
+#set environment variable, elle peut etre ecrasé dans le deployment kubernetes (ou via configmap/secret)
+ENV API_KEY_ENV envVariableTest
 
 RUN mkdir applis
 
