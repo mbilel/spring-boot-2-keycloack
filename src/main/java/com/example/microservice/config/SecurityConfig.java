@@ -80,6 +80,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     	 super.configure(http);
          http.authorizeRequests()
          .antMatchers(HttpMethod.OPTIONS).permitAll()
+         .antMatchers("/public/**").permitAll()
          .antMatchers("/api/unsecured").permitAll()
          .antMatchers("/api/resource/**").hasRole("manager") // only manager with role user are allowed to access
          .antMatchers("/api/ip").hasRole("administrator"); 
